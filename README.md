@@ -4,6 +4,8 @@
 
 <h1 align="center">静夜时钟 · QuietClock</h1>
 
+<p align="center"><strong>简体中文</strong> · <a href="README.en.md">English</a></p>
+
 <p align="center">一个轻量的原生 Android 横屏翻页时钟</p>
 <p align="center">纯黑背景 · 翻页数字 · 夜间时段 · 整体位移</p>
 
