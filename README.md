@@ -143,3 +143,13 @@ app/build/outputs/apk/debug/app-debug.apk
 静夜时钟的原创代码与资源采用 [MIT License](LICENSE)，版权署名为 `Copyright (c) 2026 lucifly`。该许可也适用于本仓库已发布的 0.1.3 APK 中的原创部分。
 
 Gradle Wrapper 及其他第三方组件保留各自的许可证；随仓库分发的 Gradle Wrapper 使用 Apache-2.0，许可证副本见 [licenses/Apache-2.0.txt](licenses/Apache-2.0.txt)。
+
+## 🌟 Star History
+
+<a href="https://www.star-history.com/#lucifly/QuietClock&amp;Date">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=lucifly/QuietClock&amp;type=Date&amp;theme=dark" />
+    <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=lucifly/QuietClock&amp;type=Date" />
+    <img alt="QuietClock 的 GitHub Star 历史趋势" src="https://api.star-history.com/svg?repos=lucifly/QuietClock&amp;type=Date" />
+  </picture>
+</a>
