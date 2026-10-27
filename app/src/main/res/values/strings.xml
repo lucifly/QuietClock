@@ -1,0 +1,18 @@
+<resources>
+    <string name="timer_title">自动结束</string>
+    <string name="timer_off">自动结束：未开启</string>
+    <string name="timer_remaining">自动结束：剩余 %1$d 分钟\n预计 %2$s 结束</string>
+    <string name="timer_under_minute">自动结束：剩余不足1分钟\n预计 %1$s 结束</string>
+    <string name="timer_cancel">取消自动结束</string>
+    <string name="timer_none">不设定时</string>
+    <string name="timer_30">30分钟后</string>
+    <string name="timer_60">1小时后</string>
+    <string name="timer_120">2小时后</string>
+    <string name="night_brightness_minimum">夜间亮度：最低</string>
+    <string name="night_brightness_percent">夜间亮度：%1$d%%</string>
+    <string name="night_brightness_accessibility">夜间亮度，最低至百分之十</string>
+    <string name="night_mode_dim">低亮度</string>
+    <string name="night_mode_save">省电静态</string>
+    <string name="night_dim_explanation">使用夜间亮度，保留文字颜色；无翻页动画。</string>
+    <string name="night_save_explanation">使用夜间亮度，文字更暗；无翻页动画。</string>
+</resources>

@@ -1,0 +1,40 @@
+# OS and editor metadata
+.DS_Store
+**/.DS_Store
+.idea/
+*.iml
+
+# Local build state and machine-specific configuration
+.gradle/
+.kotlin/
+local.properties
+/build-local.sh
+/build/
+**/build/
+/dist/
+.externalNativeBuild/
+.cxx/
+captures/
+*.log
+*.hprof
+hs_err_pid*
+
+# Generated installation packages
+*.apk
+*.aab
+*.apks
+
+# Credentials and signing material
+.env
+.env.*
+!.env.example
+*.jks
+*.keystore
+*.p12
+*.pfx
+*.pem
+*.key
+keystore.properties
+signing.properties
+secrets.properties
+credentials.*
