@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="108" height="108" viewBox="0 0 108 108" role="img" aria-labelledby="title">
+  <title id="title">静夜时钟应用图标</title>
+  <rect width="108" height="108" rx="25" fill="#050505"/>
+  <path d="M28,34 H48 Q52,34 52,38 V70 Q52,74 48,74 H28 Q24,74 24,70 V38 Q24,34 28,34 Z M60,34 H80 Q84,34 84,38 V70 Q84,74 80,74 H60 Q56,74 56,70 V38 Q56,34 60,34 Z" fill="#202320" />
+  <path d="M34,46 L40,41 V66 M34,66 H46 M62,46 C62,39 77,39 77,47 C77,53 63,58 62,66 H78" fill="none" stroke="#BCC6B9" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" />
+  <path d="M24,53 H52 V55 H24 Z M56,53 H84 V55 H56 Z" fill="#050505" />
+</svg>
