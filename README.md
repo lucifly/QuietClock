@@ -11,12 +11,12 @@
 
 <p align="center">
   <a href="#下载安装"><img src="docs/images/badge-android.svg" alt="支持 Android 8.0 及以上" /></a>
-  <a href="https://github.com/lucifly/QuietClock/releases/tag/v0.1.3"><img src="docs/images/badge-version.svg" alt="0.1.3 测试版" /></a>
+  <a href="https://github.com/lucifly/QuietClock/releases/tag/v0.1.4"><img src="docs/images/badge-version.svg" alt="0.1.4 测试版" /></a>
   <a href="LICENSE"><img src="docs/images/badge-license.svg" alt="MIT License" /></a>
 </p>
 
 <p align="center">
-  <a href="https://github.com/lucifly/QuietClock/releases/download/v0.1.3/QuietClock-0.1.3-debug.apk"><strong>下载 APK</strong></a>
+  <a href="https://github.com/lucifly/QuietClock/releases/download/v0.1.4/QuietClock-0.1.4-debug.apk"><strong>下载 APK</strong></a>
   · <a href="#界面效果">界面效果</a>
   · <a href="#功能特色">功能特色</a>
   · <a href="#开发与构建">自行构建</a>
@@ -33,18 +33,19 @@
 
 ## 下载安装
 
-**当前版本：0.1.3 测试版 · Android 8.0 及以上**
+**当前版本：0.1.4 测试版 · Android 8.0 及以上**
 
-1. 在手机上[下载 APK 安装包](https://github.com/lucifly/QuietClock/releases/download/v0.1.3/QuietClock-0.1.3-debug.apk)。
+1. 在手机上[下载 APK 安装包](https://github.com/lucifly/QuietClock/releases/download/v0.1.4/QuietClock-0.1.4-debug.apk)。
 2. 打开下载的 APK，按系统提示允许该下载来源安装应用。
 3. 启动静夜时钟，横放手机；轻触屏幕可打开设置。
 
-[查看 Release 与校验文件](https://github.com/lucifly/QuietClock/releases/tag/v0.1.3)。GitHub 自动生成的 `Source code` 文件为源码，安装应用请选择 `.apk` 文件。当前 APK 使用调试签名，沿用此前测试版签名。
+[查看 Release 与校验文件](https://github.com/lucifly/QuietClock/releases/tag/v0.1.4)。GitHub 自动生成的 `Source code` 文件为源码，安装应用请选择 `.apk` 文件。当前 APK 使用调试签名，沿用此前测试版签名。
 
 ## 功能特色
 
 | 功能 | 显示与操作 |
 | :--- | :--- |
+| **中英文支持** | 跟随系统语言自动切换界面、日期、电量、设置与无障碍提示；其他未支持的语言回退到英文。 |
 | **翻页时钟** | 小时、分钟分组显示，数字中央保留黑色折痕；数字变化时短暂翻页，牌面背景同步出现，结束后恢复纯黑。 |
 | **日期与电量** | 显示日期、电量和充电状态，遵循系统的 12/24 小时格式。 |
 | **整体位移** | 时间、日期和电量一起移动，每分钟小幅偏移、每 10 分钟轮换较大的位置，并限制在显示区域内。 |
@@ -115,7 +116,7 @@ app/build/outputs/apk/debug/app-debug.apk
 <details>
 <summary><strong>测试覆盖与实现说明</strong></summary>
 
-- 13 项 Android 行为模拟回归测试，覆盖启动、触控、暂停恢复、弹窗亮度、旋转、倒计时、布局缓存、图标及夜间亮度升级和保存。
+- 20 项 Android 行为模拟回归测试，覆盖启动、触控、暂停恢复、弹窗亮度、旋转、倒计时、布局缓存、图标、夜间亮度升级和保存，以及中英文切换、日期格式、语言优先级和设置保持。
 - 行为测试基于 Robolectric，在 JVM 中模拟 Android 15（API 35），不能替代真机测试。
 - 绘制布局、字体度量和数字拆分结果缓存，在尺寸、字体配置、内容或位置变化时更新。
 - 夜间时段按本地时间计算，开始包含、结束不包含；修改系统时间或时区后重新判断。
@@ -125,11 +126,12 @@ app/build/outputs/apk/debug/app-debug.apk
 
 ## 更新记录
 
-**[0.1.3](https://github.com/lucifly/QuietClock/releases/tag/v0.1.3)** · 夜间默认亮度由 2% 提高至 4%，兼容旧版设置升级，保留后续手动调整。
+**[0.1.4](https://github.com/lucifly/QuietClock/releases/tag/v0.1.4)** · 新增英文支持，界面跟随系统语言自动切换；日期、电量、设置和无障碍提示同步本地化。
 
 <details>
 <summary>更早的版本</summary>
 
+- **0.1.3**：夜间默认亮度由 2% 提高至 4%，兼容旧版设置升级，保留后续手动调整。
 - **0.1.2**：增加夜间亮度滑块。
 - **0.1.1**：完善自动结束状态、增加应用图标、缓存绘制布局。
 - **0.1**：横屏翻页时钟原型。
@@ -142,7 +144,7 @@ app/build/outputs/apk/debug/app-debug.apk
 
 ## 许可证
 
-静夜时钟的原创代码与资源采用 [MIT License](LICENSE)，版权署名为 `Copyright (c) 2026 lucifly`。该许可也适用于本仓库已发布的 0.1.3 APK 中的原创部分。
+静夜时钟的原创代码与资源采用 [MIT License](LICENSE)，版权署名为 `Copyright (c) 2026 lucifly`。该许可也适用于本仓库发布的 APK 中的原创部分。
 
 Gradle Wrapper 及其他第三方组件保留各自的许可证；随仓库分发的 Gradle Wrapper 使用 Apache-2.0，许可证副本见 [licenses/Apache-2.0.txt](licenses/Apache-2.0.txt)。
 

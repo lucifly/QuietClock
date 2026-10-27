@@ -83,9 +83,9 @@ public class MainActivity extends Activity {
         setContentView(root);
         applyPreferences();
         if (!prefs.getBoolean("introduced", false)) {
-            showClockDialog(new AlertDialog.Builder(this).setTitle("静夜时钟")
-                .setMessage("轻触屏幕可调亮度、颜色和结束时间。\n\n时钟每分钟更新并小幅移动。屏幕保持点亮；按电源键会正常熄屏，App 不会自动重新亮屏。\n\n实际耗电请以手机测试为准，位置移动不能完全消除烧屏风险。")
-                .setPositiveButton("开始", (d, w) -> prefs.edit().putBoolean("introduced", true).apply()).create());
+            showClockDialog(new AlertDialog.Builder(this).setTitle(R.string.app_name)
+                .setMessage(R.string.welcome_message)
+                .setPositiveButton(R.string.start_clock, (d, w) -> prefs.edit().putBoolean("introduced", true).apply()).create());
         }
     }
     private TextView label(int size) {
@@ -154,17 +154,19 @@ public class MainActivity extends Activity {
         boolean wasNight = nightActive;
         applyDisplayPolicy(localTime.get(Calendar.HOUR_OF_DAY) * 60 + localTime.get(Calendar.MINUTE));
         boolean use24 = android.text.format.DateFormat.is24HourFormat(this);
-        String hours = new SimpleDateFormat(use24 ? "HH" : "hh", Locale.getDefault()).format(now);
-        String minutes = new SimpleDateFormat("mm", Locale.getDefault()).format(now);
-        String date = new SimpleDateFormat("M月d日  EEEE", Locale.SIMPLIFIED_CHINESE).format(now);
-        if (!use24) date += " · " + new SimpleDateFormat("a", Locale.getDefault()).format(now);
+        Locale locale = displayLocale();
+        String hours = new SimpleDateFormat(use24 ? "HH" : "hh", locale).format(now);
+        String minutes = new SimpleDateFormat("mm", locale).format(now);
+        String date = new SimpleDateFormat(getString(R.string.date_pattern), locale).format(now);
+        if (!use24) date += " · " + new SimpleDateFormat("a", locale).format(now);
         Intent status = registerReceiver(null, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
         String info = "";
         if (status != null) {
             int level = status.getIntExtra(BatteryManager.EXTRA_LEVEL, -1);
             int scale = status.getIntExtra(BatteryManager.EXTRA_SCALE, 100);
             boolean charging = status.getIntExtra(BatteryManager.EXTRA_PLUGGED, 0) != 0;
-            if (level >= 0 && scale > 0) info = (charging ? "充电中 · " : "电量 · ") + level * 100 / scale + "%";
+            if (level >= 0 && scale > 0) info = getString(charging ? R.string.charging_status : R.string.battery_status,
+                level * 100 / scale);
         }
         clock.update(hours, minutes, date + (info.isEmpty() ? "" : "    ·    " + info),
             localTime.get(Calendar.HOUR_OF_DAY) * 60 + localTime.get(Calendar.MINUTE), animateNextTick && !nightActive && !wasNight);
@@ -176,22 +178,22 @@ public class MainActivity extends Activity {
         LinearLayout panel = new LinearLayout(this);
         panel.setOrientation(LinearLayout.VERTICAL); panel.setPadding(40, 16, 40, 16);
         TextView brightness = new TextView(this);
-        brightness.setText("常规亮度（夜间时段外）：" + prefs.getInt("brightness", 5) + "%");
+        brightness.setText(getString(R.string.regular_brightness_percent, prefs.getInt("brightness", 5)));
         panel.addView(brightness);
         SeekBar slider = new SeekBar(this); slider.setMax(29);
         slider.setProgress(Math.max(0, prefs.getInt("brightness", 5) - 1));
-        slider.setContentDescription("时钟亮度，1%到30%");
+        slider.setContentDescription(getString(R.string.regular_brightness_accessibility));
         slider.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             public void onProgressChanged(SeekBar bar, int value, boolean user) {
                 if (!user) return;
                 prefs.edit().putInt("brightness", value + 1).apply();
-                brightness.setText("常规亮度（夜间时段外）：" + (value + 1) + "%"); applyPreferences();
+                brightness.setText(getString(R.string.regular_brightness_percent, value + 1)); applyPreferences();
             }
             public void onStartTrackingTouch(SeekBar bar) {}
             public void onStopTrackingTouch(SeekBar bar) {}
         });
         panel.addView(slider);
-        TextView color = label(16); color.setText("切换颜色：灰 / 暖 / 绿"); panel.addView(color);
+        TextView color = label(16); color.setText(R.string.color_switch); panel.addView(color);
         color.setOnClickListener(v -> {
             prefs.edit().putInt("color", (prefs.getInt("color", 0) + 1) % 3).apply(); applyPreferences();
             color.setTextColor(foregroundColor);
@@ -208,14 +210,14 @@ public class MainActivity extends Activity {
                 handler.removeCallbacks(tick); if (resumed) handler.post(tick);
             }).create()));
         Switch rotate = new Switch(this);
-        rotate.setText("旋转180°");
+        rotate.setText(R.string.rotate_180);
         rotate.setChecked(prefs.getBoolean("rotate180", false)); panel.addView(rotate);
         rotate.setOnCheckedChangeListener((button, checked) -> {
             prefs.edit().putBoolean("rotate180", checked).apply();
             applyOrientation();
         });
         Switch night = new Switch(this);
-        night.setText("定时夜间模式");
+        night.setText(R.string.night_enabled);
         night.setChecked(prefs.getBoolean("nightEnabled", true)); panel.addView(night);
         night.setOnCheckedChangeListener((button, checked) -> {
             prefs.edit().putBoolean("nightEnabled", checked).apply(); refreshClock();
@@ -236,8 +238,8 @@ public class MainActivity extends Activity {
         });
         panel.addView(nightSlider);
         TextView start = label(16), end = label(16), mode = label(16);
-        start.setText("开始时间：" + formatMinute(prefs.getInt("nightStart", 23 * 60)));
-        end.setText("结束时间：" + formatMinute(prefs.getInt("nightEnd", 7 * 60)));
+        start.setText(getString(R.string.night_start, formatMinute(prefs.getInt("nightStart", 23 * 60))));
+        end.setText(getString(R.string.night_end, formatMinute(prefs.getInt("nightEnd", 7 * 60))));
         start.setOnClickListener(v -> pickNightTime(true, start));
         end.setOnClickListener(v -> pickNightTime(false, end));
         panel.addView(start); panel.addView(end);
@@ -246,19 +248,19 @@ public class MainActivity extends Activity {
         TextView modeHint = label(13);
         modeHint.setText(explanations[Math.max(0, Math.min(1, prefs.getInt("nightMode", 0)))]);
         mode.setText(modes[Math.max(0, Math.min(1, prefs.getInt("nightMode", 0)))]);
-        mode.setOnClickListener(v -> showClockDialog(new AlertDialog.Builder(this).setTitle("夜间显示方式")
+        mode.setOnClickListener(v -> showClockDialog(new AlertDialog.Builder(this).setTitle(R.string.night_mode_title)
             .setSingleChoiceItems(modes, prefs.getInt("nightMode", 0), (dialog, selected) -> {
                 prefs.edit().putInt("nightMode", selected).apply(); mode.setText(modes[selected]); modeHint.setText(explanations[selected]);
                 refreshClock(); dialog.dismiss();
-            }).setNegativeButton("取消", null).create()));
+            }).setNegativeButton(R.string.cancel, null).create()));
         panel.addView(mode); panel.addView(modeHint);
         TextView hint = label(13);
-        hint.setText("可跨午夜，例如23:00至次日07:00。时段内无翻页动画，时间、日期和电量继续按分钟更新并整体位移。结束后恢复常规设置。夜间亮度可调，滑到最左侧可恢复手机最低亮度。省电效果需实测。");
+        hint.setText(R.string.night_hint);
         panel.addView(hint);
         ScrollView scroll = new ScrollView(this); scroll.addView(panel);
-        AlertDialog dialog = new AlertDialog.Builder(this).setTitle("时钟设置").setView(scroll)
-            .setPositiveButton("返回时钟", (d, w) -> refreshClock())
-            .setNegativeButton("退出", (d, w) -> finish()).create();
+        AlertDialog dialog = new AlertDialog.Builder(this).setTitle(R.string.settings_title).setView(scroll)
+            .setPositiveButton(R.string.back_to_clock, (d, w) -> refreshClock())
+            .setNegativeButton(R.string.exit_clock, (d, w) -> finish()).create();
         timerLabels.put(dialog, timer);
         showClockDialog(dialog);
         updateTimerLabels();
@@ -300,6 +302,10 @@ public class MainActivity extends Activity {
         dialog.show();
     }
 
+    private Locale displayLocale() {
+        // Use the selected resource language so fallback locales do not mix languages in the clock.
+        return Locale.forLanguageTag(getString(R.string.formatting_locale));
+    }
     private String formatMinute(int minute) {
         return String.format(Locale.ROOT, "%02d:%02d", minute / 60, minute % 60);
     }
@@ -310,10 +316,10 @@ public class MainActivity extends Activity {
             int chosen = hour * 60 + minute;
             int other = prefs.getInt(isStart ? "nightEnd" : "nightStart", isStart ? 7 * 60 : 23 * 60);
             if (chosen == other) {
-                Toast.makeText(this, "开始和结束时间不能相同", Toast.LENGTH_SHORT).show(); return;
+                Toast.makeText(this, R.string.night_times_must_differ, Toast.LENGTH_SHORT).show(); return;
             }
             prefs.edit().putInt(key, chosen).apply();
-            label.setText((isStart ? "开始时间：" : "结束时间：") + formatMinute(chosen));
+            label.setText(getString(isStart ? R.string.night_start : R.string.night_end, formatMinute(chosen)));
             refreshClock();
         }, value / 60, value % 60, true));
     }

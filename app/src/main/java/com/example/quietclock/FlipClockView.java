@@ -54,7 +54,7 @@ public final class FlipClockView extends View {
         if (!minutes.text.equals(m)) minutes = new Digits(m);
         details = info; layoutMinute = minute;
         if (layoutChanged) rebuildLayout();
-        setContentDescription(h + ":" + m + "，" + info + "，轻触打开设置");
+        setContentDescription(getResources().getString(R.string.clock_accessibility, h, m, info));
         if (animate && changed && !oldHours.text.isEmpty() && ValueAnimator.areAnimatorsEnabled()) {
             animation = ValueAnimator.ofFloat(0, 1);
             animation.setDuration(480);

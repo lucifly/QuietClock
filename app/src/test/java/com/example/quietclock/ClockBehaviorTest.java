@@ -31,7 +31,7 @@ import static org.junit.Assert.*;
 import static org.robolectric.Shadows.shadowOf;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(sdk=35, qualifiers="land")
+@Config(sdk=35, qualifiers="zh-rCN-land")
 @LooperMode(LooperMode.Mode.PAUSED)
 public class ClockBehaviorTest {
     ActivityController<MainActivity> controller;

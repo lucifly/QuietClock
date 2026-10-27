@@ -11,12 +11,12 @@
 
 <p align="center">
   <a href="#download-and-install"><img src="docs/images/badge-android.svg" alt="Android 8.0 and above" /></a>
-  <a href="https://github.com/lucifly/QuietClock/releases/tag/v0.1.3"><img src="docs/images/badge-version.svg" alt="0.1.3 test release" /></a>
+  <a href="https://github.com/lucifly/QuietClock/releases/tag/v0.1.4"><img src="docs/images/badge-version.svg" alt="0.1.4 test release" /></a>
   <a href="LICENSE"><img src="docs/images/badge-license.svg" alt="MIT License" /></a>
 </p>
 
 <p align="center">
-  <a href="https://github.com/lucifly/QuietClock/releases/download/v0.1.3/QuietClock-0.1.3-debug.apk"><strong>Download APK</strong></a>
+  <a href="https://github.com/lucifly/QuietClock/releases/download/v0.1.4/QuietClock-0.1.4-debug.apk"><strong>Download APK</strong></a>
   · <a href="#preview">Preview</a>
   · <a href="#features">Features</a>
   · <a href="#development-and-build">Build from source</a>
@@ -33,20 +33,21 @@ This preview was generated using the app's actual drawing code. The time, date, 
 
 ## Download and install
 
-**Current version: 0.1.3 test release · Android 8.0 or later**
+**Current version: 0.1.4 test release · Android 8.0 or later**
 
-1. [Download the APK](https://github.com/lucifly/QuietClock/releases/download/v0.1.3/QuietClock-0.1.3-debug.apk) on your phone.
+1. [Download the APK](https://github.com/lucifly/QuietClock/releases/download/v0.1.4/QuietClock-0.1.4-debug.apk) on your phone.
 2. Open the downloaded APK and follow Android's prompts to allow installation from that source.
 3. Open QuietClock and place your phone horizontally. Tap the clock to open settings.
 
-[View the release and checksum file](https://github.com/lucifly/QuietClock/releases/tag/v0.1.3). GitHub's automatically generated `Source code` archives contain the source, not the installer. Choose the `.apk` file to install the app. The current APK uses the same debug signing certificate as earlier test builds.
+[View the release and checksum file](https://github.com/lucifly/QuietClock/releases/tag/v0.1.4). GitHub's automatically generated `Source code` archives contain the source, not the installer. Choose the `.apk` file to install the app. The current APK uses the same debug signing certificate as earlier test builds.
 
-The app interface and date labels are currently in Chinese.
+The app follows the system language automatically: Chinese and English are supported, with English as the fallback for unsupported languages.
 
 ## Features
 
 | Feature | What it does |
 | :--- | :--- |
+| **Chinese and English** | Automatically localizes the interface, date, battery status, settings, and accessibility prompts to match the system language. Unsupported languages fall back to English. |
 | **Flip clock** | Displays hours and minutes in separate groups with a black fold line through the digits. Brief flip animations show the card backgrounds, which return to black afterward. |
 | **Date and battery** | Displays the date, battery level, and charging status. Follows the system's 12/24-hour time format. |
 | **Display shifting** | Moves the time, date, and battery information together: small shifts every minute and larger position changes every 10 minutes, constrained to the visible area. |
@@ -117,7 +118,7 @@ Debug builds use the developer's local debug signing certificate. No private key
 <details>
 <summary><strong>Test coverage and implementation notes</strong></summary>
 
-- 13 Android behavior regression tests cover startup, touch interaction, pause/resume, dialog brightness, rotation, countdown timers, layout caching, app icons, and night brightness migration and persistence.
+- 20 Android behavior regression tests cover startup, touch interaction, pause/resume, dialog brightness, rotation, countdown timers, layout caching, app icons, and night brightness migration and persistence, language changes, localized dates, language priority, and settings preservation.
 - Tests use Robolectric to simulate Android 15 (API 35) on the JVM and do not replace testing on a physical device.
 - Layout, font metrics, and split digit strings are cached and updated when size, font configuration, content, or position changes.
 - Night schedules use local time, including the start and excluding the end. The schedule is reevaluated after system time or time zone changes.
@@ -127,11 +128,12 @@ Debug builds use the developer's local debug signing certificate. No private key
 
 ## Changelog
 
-**[0.1.3](https://github.com/lucifly/QuietClock/releases/tag/v0.1.3)** · Raised the default night brightness from 2% to 4%, with migration for older settings while preserving subsequent manual adjustments.
+**[0.1.4](https://github.com/lucifly/QuietClock/releases/tag/v0.1.4)** · Added English support with automatic system language selection, including localized dates, battery status, settings, and accessibility prompts.
 
 <details>
 <summary>Earlier versions</summary>
 
+- **0.1.3:** Raised default night brightness from 2% to 4%, with migration for older settings while preserving subsequent manual adjustments.
 - **0.1.2:** Added a night brightness slider.
 - **0.1.1:** Improved auto-stop status, added app icons, and cached the drawing layout.
 - **0.1:** Initial landscape flip clock prototype.
@@ -144,7 +146,7 @@ Found a bug or have a feature suggestion? [Open an issue](https://github.com/luc
 
 ## License
 
-QuietClock's original code and assets are licensed under the [MIT License](LICENSE), with the copyright notice `Copyright (c) 2026 lucifly`. This license also applies to the original portions of the published 0.1.3 APK.
+QuietClock's original code and assets are licensed under the [MIT License](LICENSE), with the copyright notice `Copyright (c) 2026 lucifly`. This license also applies to the original portions of the APKs published in this repository.
 
 Gradle Wrapper and other third-party components retain their own licenses. The Gradle Wrapper distributed with this repository is licensed under Apache-2.0; a copy is available at [licenses/Apache-2.0.txt](licenses/Apache-2.0.txt).
 
