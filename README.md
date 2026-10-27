@@ -68,3 +68,9 @@ app/build/outputs/apk/debug/app-debug.apk
 - **0.1.2**：增加夜间亮度滑块。
 - **0.1.1**：完善自动结束状态、增加应用图标、缓存绘制布局。
 - **0.1**：横屏翻页时钟原型。
+
+## 许可证
+
+静夜时钟的原创代码与资源采用 [MIT License](LICENSE)，版权署名为 `Copyright (c) 2026 lucifly`。该许可也适用于本仓库已发布的 0.1.3 APK 中的原创部分。
+
+Gradle Wrapper 及其他第三方组件保留各自的许可证；随仓库分发的 Gradle Wrapper 使用 Apache-2.0，许可证副本见 [licenses/Apache-2.0.txt](licenses/Apache-2.0.txt)。
